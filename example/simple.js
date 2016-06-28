@@ -1,27 +1,20 @@
 var git = require('../')
 
-git.short(function (str) {
-  console.log('short', str)
+git.short().then(console.log)
   // => aefdd94
-})
-
-git.long(function (str) {
-  console.log('long', str)
+  
+git.long().then(console.log)
   // => aefdd946ea65c88f8aa003e46474d57ed5b291d1
-})
 
-git.branch(function (str) {
-  console.log('branch', str)
+
+git.branch().then(console.log)
   // => master
-})
 
-git.tag(function (str) {
-  console.log('tag', str)
+
+git.tag().then(console.log)
   // => 0.1.0
-})
 
-git.log(function (array) {
-  console.log('log', array)
+git.log().then(console.log)
   // [ [ 'aefdd946ea65c88f8aa003e46474d57ed5b291d1',
   //     'add description',
   //     '7 hours ago',
@@ -34,4 +27,6 @@ git.log(function (array) {
   //     'first commit',
   //     '2 days ago',
   //     'Thomas Blobaum' ] ]
-})
+
+git.isUpdateToDate().then(console.log)
+  // => true ... false

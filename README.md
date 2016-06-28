@@ -1,31 +1,45 @@
-# git-rev
+# git-rev + promises
 
-access git revision state in node
+access git revision state in node with promises
 
 # Example
 
 ``` js
 var git = require('git-rev')
 
-git.short(function (str) {
+git.short().then(function (str) {
   console.log('short', str)
   // => aefdd94
 })
 
-git.long(function (str) {
-  console.log('long', str)
+  
+git.long().then(console.log)
   // => aefdd946ea65c88f8aa003e46474d57ed5b291d1
-})
 
-git.branch(function (str) {
-  console.log('branch', str)
+
+git.branch().then(console.log)
   // => master
-})
 
-git.tag(function (str) {
-  console.log('tag', str)
+
+git.tag().then(console.log)
   // => 0.1.0
-})
+
+git.log().then(console.log)
+  // [ [ 'aefdd946ea65c88f8aa003e46474d57ed5b291d1',
+  //     'add description',
+  //     '7 hours ago',
+  //     'Thomas Blobaum' ],
+  //   [ '1eb9a6c8633a5a47a47487f17b17ae545d0e26a8',
+  //     'first',
+  //     '7 hours ago',
+  //     'Thomas Blobaum' ],
+  //   [ '7f85b750b908d28bfeb13ad6dba47d9d604508f9',
+  //     'first commit',
+  //     '2 days ago',
+  //     'Thomas Blobaum' ] ]
+
+git.isUpdateToDate().then(console.log)
+  // => true ... false
 
 ```
 
@@ -76,7 +90,7 @@ return the current branch
 
 (The MIT License)
 
-Copyright (c) 2012 Thomas Blobaum <tblobaum@gmail.com>
+Copyright (c) 2012/2015 Brian Shannon & Thomas Blobaum <tblobaum@gmail.com> 
 
 Permission is hereby granted, free of charge, to any person obtaining
 a copy of this software and associated documentation files (the
