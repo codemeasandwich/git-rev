@@ -4,6 +4,14 @@ access git revision state in node with promises
 
 # Example
 
+## run sample
+
+``` bash
+node example/simple.js
+```
+
+## code
+
 ``` js
 var git = require('git-rev')
 

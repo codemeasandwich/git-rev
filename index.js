@@ -11,7 +11,7 @@ function gitInfo(command, parcer){
 
 function refrashRepo(branchName) {
     return new Promise(function(resolve, reject) {
-         _command("git fetch origin "+branchName,
+         gitInfo("git fetch origin "+branchName,
            function(val){  resolve(branchName)  })
     });
 }
@@ -30,18 +30,14 @@ var branchName, localHash
       })
       .then(function(hash){
         localHash = hash
-        return gitInfo('git rev-parse origin/prod');
+        return gitInfo('git rev-parse origin/'+branchName);
       })
       .then(function(remoteHash){
-        // console.log("branchName",branchName);
-        // console.log("localHash",localHash);
-        // console.log("remoteHash",remoteHash);
         return localHash === remoteHash
       })
       .catch(function(err){
           throw err      
       })
-      
     },
     short : function () {
       return gitInfo('git rev-parse --short HEAD');
