@@ -1,15 +1,11 @@
 var exec = require('child_process').exec
 
-function _command (cmd, cb) {
-  exec(cmd, { cwd: __dirname }, function (err, stdout, stderr) {
-    cb(stdout.split('\n').join(''))
-  })
-}
-
 function gitInfo(command, parcer){
     return new Promise(function(resolve, reject) {
-         _command(command,
-           function(val){  resolve((parcer)?parcer(val):val)  })
+      exec(command, { cwd: __dirname }, function (err, stdout, stderr) {
+        var output = stdout.split('\n').join('');
+        resolve((parcer)?parcer(output):output)
+      })
     });
 }
 
