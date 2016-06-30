@@ -64,7 +64,7 @@ var GitRev = {
   , log : function (parcer) {
       parcer = parcer || function (str) {
         str = str.split("¹").map(function(row){
-            return row.split("§");
+            return row.split("°");
         });
         str.pop();
         return JSON.stringify(str)
