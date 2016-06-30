@@ -1,5 +1,7 @@
 # git-rev + promises
 
+[![npm version](https://badge.fury.io/js/git-rev-promises.svg)](https://badge.fury.io/js/git-rev-promises)
+
 access git revision state in node with promises
 
 # Install

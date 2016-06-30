@@ -3,7 +3,7 @@ var exec = require('child_process').exec
 function gitInfo(command, parcer,raw){
     return new Promise(function(resolve, reject) {
       exec(command, { cwd: __dirname }, function (err, stdout, stderr) {
-        var output = (raw) ? stdout : stdout.split('\n').join('');
+        var output = (raw) ? stdout : stdout.split('\n').join('').trim();
         resolve((parcer)?parcer(output):output)
       })
     });
@@ -46,7 +46,7 @@ var GitRev = {
     },
     // BY: https://github.com/rkr-io
     message : function (parcer) { 
-      return gitInfo('git log -1 --pretty=%B',parcer,true);
+      return gitInfo('git log -1 --pretty=%B',parcer);
     },
     // BY: https://github.com/blaffoy
     date : function (parcer) { 
@@ -63,10 +63,13 @@ var GitRev = {
     }
   , log : function (parcer) {
       parcer = parcer || function (str) {
-        str = str.substr(0, str.length-1)
-        return JSON.parse('[' + str + ']')
+        str = str.split("¹").map(function(row){
+            return row.split("§");
+        });
+        str.pop();
+        return JSON.stringify(str)
       }
-      return gitInfo('git log --no-color --pretty=format:\'[ "%H", "%s", "%cr", "%an" ],\' --abbrev-commit',parcer);
+      return gitInfo('git log --no-color --pretty=format:\'%H°%s°%cr°%an¹\' --abbrev-commit',parcer);
     
     }
 }
