@@ -92,7 +92,7 @@ return the current branch
 
 # Install
 
-`npm install git-rev`
+`npm install git-rev-promises`
 
 # License
 

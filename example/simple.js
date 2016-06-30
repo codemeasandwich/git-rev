@@ -6,7 +6,6 @@ git.short().then(console.log)
 git.long().then(console.log)
   // => aefdd946ea65c88f8aa003e46474d57ed5b291d1
 
-
 git.branch().then(console.log)
   // => master
 
@@ -14,7 +13,7 @@ git.branch().then(console.log)
 git.tag().then(console.log)
   // => 0.1.0
 
-git.log().then(console.log)
+//git.log().then(console.log).catch(console.error)
   // [ [ 'aefdd946ea65c88f8aa003e46474d57ed5b291d1',
   //     'add description',
   //     '7 hours ago',
@@ -27,6 +26,7 @@ git.log().then(console.log)
   //     'first commit',
   //     '2 days ago',
   //     'Thomas Blobaum' ] ]
+  
+git.isUpdateToDate().then(console.log);
 
-git.isUpdateToDate().then(console.log)
   // => true ... false
