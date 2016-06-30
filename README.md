@@ -2,6 +2,10 @@
 
 access git revision state in node with promises
 
+# Install
+
+`npm install git-rev-promises`
+
 # Example
 
 ## run sample
@@ -31,6 +35,9 @@ git.branch().then(console.log)
 git.date().then(console.log)
   // => 2015-08-18 17:15: 48 +0100
 
+git.message().then(console.log)
+  // => Add commit-message command
+  
 git.tag().then(console.log)
   // => 0.1.0
 
@@ -92,9 +99,6 @@ return the current tag
 ## .branch(function (branch) { ... })
 return the current branch
 
-# Install
-
-`npm install git-rev-promises`
 
 # License
 

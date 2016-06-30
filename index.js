@@ -1,9 +1,9 @@
 var exec = require('child_process').exec
 
-function gitInfo(command, parcer){
+function gitInfo(command, parcer,raw){
     return new Promise(function(resolve, reject) {
       exec(command, { cwd: __dirname }, function (err, stdout, stderr) {
-        var output = stdout.split('\n').join('');
+        var output = (raw) ? stdout : stdout.split('\n').join('');
         resolve((parcer)?parcer(output):output)
       })
     });
@@ -16,17 +16,19 @@ function refrashRepo(branchName) {
     });
 }
 
-var GitRev = { 
+var GitRev = {
+    
+// BY: https://github.com/codemeasandwich
     isUpdateToDate : function () {
       
-var branchName, localHash
+      var branchName, localHash;
       
       return GitRev
       .branch()
       .then(refrashRepo)
       .then(function(branch){
         branchName = branch;
-        return GitRev.long()
+        return GitRev.long();
       })
       .then(function(hash){
         localHash = hash
@@ -39,28 +41,32 @@ var branchName, localHash
           throw err      
       })
     },
-    short : function () {
-      return gitInfo('git rev-parse --short HEAD');
+    short : function (parcer) {
+      return gitInfo('git rev-parse --short HEAD',parcer);
     },
-    
+    // BY: https://github.com/rkr-io
+    message : function (parcer) { 
+      return gitInfo('git log -1 --pretty=%B',parcer,true);
+    },
     // BY: https://github.com/blaffoy
-    date : function (cb) { 
-      return gitInfo('git show -s --format=%ci');
+    date : function (parcer) { 
+      return gitInfo('git show -s --format=%ci',parcer);
     }
-  , long : function () { 
-      return gitInfo('git rev-parse HEAD');
+  , long : function (parcer) { 
+      return gitInfo('git rev-parse HEAD',parcer);
     }
-  , branch : function () { 
-      return gitInfo('git rev-parse --abbrev-ref HEAD');
+  , branch : function (parcer) { 
+      return gitInfo('git rev-parse --abbrev-ref HEAD',parcer);
     }
-  , tag : function () { 
-      return gitInfo('git describe --always --tag --abbrev=0');
+  , tag : function (parcer) { 
+      return gitInfo('git describe --always --tag --abbrev=0',parcer);
     }
-  , log : function () { 
-      return gitInfo('git log --no-color --pretty=format:\'[ "%H", "%s", "%cr", "%an" ],\' --abbrev-commit',function (str) {
+  , log : function (parcer) {
+      parcer = parcer || function (str) {
         str = str.substr(0, str.length-1)
         return JSON.parse('[' + str + ']')
-      });
+      }
+      return gitInfo('git log --no-color --pretty=format:\'[ "%H", "%s", "%cr", "%an" ],\' --abbrev-commit',parcer);
     
     }
 }

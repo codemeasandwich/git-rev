@@ -12,6 +12,9 @@ git.branch().then(console.log)
 git.tag().then(console.log)
   // => 0.1.0
   
+git.message().then(console.log)
+  // => Add commit-message command
+  
 git.date().then(console.log)
   // => 2015-08-18 17:15: 48 +0100
 
