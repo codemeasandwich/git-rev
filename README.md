@@ -46,25 +46,28 @@ return where or not you are on the SAME commit as origin
 ## .count()
 return the commit count
 
-## .log(function (array) { ... })
+## .log()
 return the git log of `process.cwd()` as an array
 
 ``` js
-git.log(function (array) {
-  console.log('log', array)
-  // [ [ 'aefdd946ea65c88f8aa003e46474d57ed5b291d1',
-  //     'add description',
-  //     '7 hours ago',
-  //     'Thomas Blobaum' ],
-  //   [ '1eb9a6c8633a5a47a47487f17b17ae545d0e26a8',
-  //     'first',
-  //     '7 hours ago',
-  //     'Thomas Blobaum' ],
-  //   [ '7f85b750b908d28bfeb13ad6dba47d9d604508f9',
-  //     'first commit',
-  //     '2 days ago',
-  //     'Thomas Blobaum' ] ]
-})
+git.log().then(console.log).catch(console.error)
+  //[[
+  //  "83d9628821fb3fa83a0540d329051a862d0b7e01",
+  //  "Remove code dump from readme + added missing function call info",
+  //  "7 hours ago",
+  //  "brian"
+  //],[
+  //  "9309bff7ad5f8fc8e1a9dcdac84d43d0cdff426b",
+  //  "Add commit-message command + you can now pass in a string parsing function",
+  //  "7 hours ago",
+  //  "brian"
+  //],[
+  //  "1b69da352c8dc3efec347d8be0e80cc849302fd7",
+  //  "Adds `date` promise to return date of commit",
+  //  "7 hours ago",
+  //  "brian"
+  //]]
+
 ```
 
 # License
