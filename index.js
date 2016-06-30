@@ -18,7 +18,7 @@ function refrashRepo(branchName) {
 
 var GitRev = {
     
-// BY: https://github.com/codemeasandwich
+    // BY: https://github.com/codemeasandwich
     isUpdateToDate : function () {
       
       var branchName, localHash;
@@ -41,6 +41,7 @@ var GitRev = {
           throw err      
       })
     },
+    // BY: https://github.com/tblobaum
     short : function (parcer) {
       return gitInfo('git rev-parse --short HEAD',parcer);
     },
@@ -52,15 +53,21 @@ var GitRev = {
     date : function (parcer) { 
       return gitInfo('git show -s --format=%ci',parcer);
     }
+    // BY: https://github.com/tblobaum
   , long : function (parcer) { 
       return gitInfo('git rev-parse HEAD',parcer);
     }
+    // BY: https://github.com/tblobaum
   , branch : function (parcer) { 
       return gitInfo('git rev-parse --abbrev-ref HEAD',parcer);
     }
+    // BY: https://github.com/tblobaum
   , tag : function (parcer) { 
       return gitInfo('git describe --always --tag --abbrev=0',parcer);
     }
+    // BY: https://github.com/tblobaum
+    // v2 https://github.com/marcoceppi
+    // v3 https://github.com/codemeasandwich
   , log : function (parcer) {
       parcer = parcer || function (str) {
         str = str.split("¹").map(function(row){
@@ -72,6 +79,10 @@ var GitRev = {
       return gitInfo('git log --no-color --pretty=format:\'%H°%s°%cr°%an¹\' --abbrev-commit',parcer);
     
     }
+    // BY: https://github.com/neenhouse
+   , count : function(parcer){ 
+    return gitInfo('git rev-list HEAD --count',parcer);
+  }
 }
 
 module.exports = GitRev;

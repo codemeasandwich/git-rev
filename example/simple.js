@@ -9,6 +9,10 @@ git.long().then(console.log)
 git.branch().then(console.log)
   // => master
 
+git.count().then(console.log)
+  // => 13
+
+
 git.tag().then(console.log)
   // => 0.1.0
   
