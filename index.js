@@ -41,6 +41,11 @@ var branchName, localHash
     },
     short : function () {
       return gitInfo('git rev-parse --short HEAD');
+    },
+    
+    // BY: https://github.com/blaffoy
+    date : function (cb) { 
+      return gitInfo('git show -s --format=%ci');
     }
   , long : function () { 
       return gitInfo('git rev-parse HEAD');

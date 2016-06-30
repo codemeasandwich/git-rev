@@ -28,6 +28,8 @@ git.long().then(console.log)
 git.branch().then(console.log)
   // => master
 
+git.date().then(console.log)
+  // => 2015-08-18 17:15: 48 +0100
 
 git.tag().then(console.log)
   // => 0.1.0

@@ -9,9 +9,11 @@ git.long().then(console.log)
 git.branch().then(console.log)
   // => master
 
-
 git.tag().then(console.log)
   // => 0.1.0
+  
+git.date().then(console.log)
+  // => 2015-08-18 17:15: 48 +0100
 
 //git.log().then(console.log).catch(console.error)
   // [ [ 'aefdd946ea65c88f8aa003e46474d57ed5b291d1',
