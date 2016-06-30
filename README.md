@@ -43,6 +43,9 @@ return the date of the last commit
 ## .isUpdateToDate()
 return where or not you are on the SAME commit as origin
 
+## .count()
+return the commit count
+
 ## .log(function (array) { ... })
 return the git log of `process.cwd()` as an array
 

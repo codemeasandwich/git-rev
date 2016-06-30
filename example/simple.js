@@ -12,7 +12,6 @@ git.branch().then(console.log)
 git.count().then(console.log)
   // => 13
 
-
 git.tag().then(console.log)
   // => 0.1.0
   
