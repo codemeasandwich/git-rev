@@ -19,7 +19,7 @@ node example/simple.js
 # Methods
 
 ``` js 
-var git = require('git-rev')
+var git = require('git-rev-promises')
 ```
 
 ## .short()
