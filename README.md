@@ -31,6 +31,9 @@ return the result of `git rev-parse HEAD`
 ## .tag()
 return the current tag
 
+## .tags()
+return all the tags sorted
+
 ## .branch()
 return the current branch
 

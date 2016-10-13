@@ -1,6 +1,6 @@
 {
   "name": "git-rev-promises",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "get the current git commit hash, tag or branch in node",
   "main": "index.js",
   "bin": {},
@@ -15,7 +15,7 @@
     "url": "git://github.com/codemeasandwich/git-rev-promises.git"
   },
   "homepage": "https://github.com/codemeasandwich/git-rev-promises",
-  "keywords": [],
+  "keywords": ["git","version","promises"],
   "author": { "name" : "Brian Shannon", "url" : "https://github.com/codemeasandwich/" },
   "license": "MIT",
   "bugs": {

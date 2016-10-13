@@ -15,6 +15,9 @@ git.count().then(console.log)
 git.tag().then(console.log)
   // => 0.1.0
   
+git.tags().then(console.log)
+  // => ['0.0.1','0.0.2','0.1.0','0.1.1']
+  
 git.message().then(console.log)
   // => Add commit-message command
   

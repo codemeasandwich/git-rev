@@ -1,5 +1,44 @@
 var exec = require('child_process').exec
 
+
+function compare(a, b) {
+// http://stackoverflow.com/a/6832706/1223585
+
+    if (a === b) {
+       return 0;
+    }
+
+    var a_components = a.split(".");
+    var b_components = b.split(".");
+
+    var len = Math.min(a_components.length, b_components.length);
+
+    // loop while the components are equal
+    for (var i = 0; i < len; i++) {
+        // A bigger than B
+        if (parseInt(a_components[i]) > parseInt(b_components[i])) {
+            return 1;
+        }
+
+        // B bigger than A
+        if (parseInt(a_components[i]) < parseInt(b_components[i])) {
+            return -1;
+        }
+    }
+
+    // If one's a prefix of the other, the longer one is greater.
+    if (a_components.length > b_components.length) {
+        return 1;
+    }
+
+    if (a_components.length < b_components.length) {
+        return -1;
+    }
+
+    // Otherwise they are the same.
+    return 0;
+}
+
 function gitInfo(command, parcer,raw){
     return new Promise(function(resolve, reject) {
       exec(command, { cwd: __dirname }, function (err, stdout, stderr) {
@@ -61,9 +100,25 @@ var GitRev = {
   , branch : function (parcer) { 
       return gitInfo('git rev-parse --abbrev-ref HEAD',parcer);
     }
-    // BY: https://github.com/tblobaum
-  , tag : function (parcer) { 
-      return gitInfo('git describe --always --tag --abbrev=0',parcer);
+    // BY: https://github.com/codemeasandwich
+  , tags : function (parcer) {
+      return gitInfo('git tag', function (tags) {
+                    var tag = tags.split(/\r?\n/)
+                                  .map(function(tag){
+                                    return ('v' === tag[0] || 'V' === tag[0]) ? tag.slice(1) : tag
+                                   })
+                                  .filter(function(tag){
+                                    return !! tag
+                                   })
+                                  .sort(compare);
+                     return (parcer) ? parcer(tag) : tag
+                  },true);
+    }
+    // BY: https://github.com/codemeasandwich
+  , tag : function (parcer) {
+      return GitRev.tags(function (tags) {
+                     return (parcer) ? parcer(tags.pop()) : tags.pop()
+                  });
     }
     // BY: https://github.com/tblobaum
     // v2 https://github.com/marcoceppi
