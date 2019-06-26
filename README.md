@@ -1,8 +1,11 @@
 # git-rev + promises
 
 [![npm version](https://badge.fury.io/js/git-rev-promises.svg)](https://badge.fury.io/js/git-rev-promises)
+[![Buy me a coffee](https://img.shields.io/badge/buy%20me-a%20coffee-orange.svg)](https://www.buymeacoffee.com/codemeasandwich)
 
 access git revision state in node with promises
+
+### If this was helpful, [★ it on github](https://github.com/codemeasandwich/git-rev-promises)
 
 # Install
 
@@ -18,15 +21,15 @@ node example/simple.js
 
 # Methods
 
-``` js 
+``` js
 var git = require('git-rev-promises')
 ```
 
 ## .short()
-return the result of `git rev-parse --short HEAD`
+return the short commit hash
 
 ## .long()
-return the result of `git rev-parse HEAD`
+return the long commit hash
 
 ## .tag()
 return the current tag
@@ -36,6 +39,12 @@ return all the tags sorted
 
 ## .branch()
 return the current branch
+
+## .origin()
+return the url for origin
+
+## .repo()
+return the name of the repository as defined on the origin.
 
 ## .message()
 return the last commit message on this branch

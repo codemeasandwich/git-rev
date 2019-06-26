@@ -101,6 +101,14 @@ var GitRev = {
       return gitInfo('git rev-parse --abbrev-ref HEAD',parcer);
     }
     // BY: https://github.com/codemeasandwich
+  , origin : function (parcer) {
+      return gitInfo('git remote get-url origin',parcer);
+    }
+    // BY: https://github.com/codemeasandwich
+  , repo : function (parcer) {
+      return gitInfo('basename -s .git `git config --get remote.origin.url`',parcer);
+    }
+    // BY: https://github.com/codemeasandwich
   , tags : function (parcer) {
       return gitInfo('git tag', function (tags) {
                     var tag = tags.split(/\r?\n/)

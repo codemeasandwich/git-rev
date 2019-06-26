@@ -17,7 +17,13 @@ git.tag().then(console.log)
   
 git.tags().then(console.log)
   // => ['0.0.1','0.0.2','0.1.0','0.1.1']
-  
+
+git.origin().then(console.log)
+  // => git@github.com:codemeasandwich/git-rev-promises.git
+
+git.repo().then(console.log)
+  // => git-rev-promises
+
 git.message().then(console.log)
   // => Add commit-message command
   
